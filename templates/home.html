@@ -1,3 +1,93 @@
-<h1>
-    This is home page
- </h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Boston House Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            padding: 20px;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            margin: auto;
+            max-width: 600px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0 16px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #0078D7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        h2 {
+            color: #333;
+        }
+        .prediction {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+            color: #0078D7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Boston House Price Prediction</h2>
+        <form action="/predict" method="POST">
+            <label>CRIM (Crime Rate):</label>
+            <input type="number" name="CRIM" step="any" required>
+
+            <label>ZN (Residential land zoned):</label>
+            <input type="number" name="ZN" step="any" required>
+
+            <label>INDUS (Non-retail business acres):</label>
+            <input type="number" name="INDUS" step="any" required>
+
+            <label>CHAS (Charles River dummy):</label>
+            <input type="number" name="CHAS" step="any" required>
+
+            <label>NOX (Nitric oxide concentration):</label>
+            <input type="number" name="NOX" step="any" required>
+
+            <label>RM (Average rooms per dwelling):</label>
+            <input type="number" name="RM" step="any" required>
+
+            <label>AGE (Proportion built before 1940):</label>
+            <input type="number" name="AGE" step="any" required>
+
+            <label>DIS (Distance to employment centers):</label>
+            <input type="number" name="DIS" step="any" required>
+
+            <label>RAD (Access to radial highways):</label>
+            <input type="number" name="RAD" step="any" required>
+
+            <label>TAX (Property tax rate):</label>
+            <input type="number" name="TAX" step="any" required>
+
+            <label>PTRATIO (Pupil-teacher ratio):</label>
+            <input type="number" name="PTRATIO" step="any" required>
+
+            <label>B (1000(Bk - 0.63)^2):</label>
+            <input type="number" name="B" step="any" required>
+
+            <label>LSTAT (% lower status population):</label>
+            <input type="number" name="LSTAT" step="any" required>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction_text %}
+            <p class="prediction">{{ prediction_text }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
