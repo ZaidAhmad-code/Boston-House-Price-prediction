@@ -2,91 +2,187 @@
 <html>
 <head>
     <title>Boston House Price Prediction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f3f3;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63);
+            min-height: 100vh;
+            margin: 0;
             padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
         }
+
         .container {
-            background-color: #fff;
-            padding: 30px;
-            margin: auto;
-            max-width: 600px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
+            background: rgba(25, 25, 45, 0.95);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            width: 800px;
+            border: 1px solid rgba(149, 125, 255, 0.1);
+            backdrop-filter: blur(8px);
         }
+
+        h2 {
+            color: #d0c5ff;
+            text-align: center;
+            margin-bottom: 35px;
+            font-size: 2.4em;
+            letter-spacing: -0.5px;
+            font-weight: 600;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #c3b4ff;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
         input[type="number"] {
             width: 100%;
-            padding: 8px;
-            margin: 8px 0 16px 0;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(149, 125, 255, 0.2);
+            border-radius: 8px;
+            font-size: 15px;
+            color: #fff;
+            transition: all 0.25s ease;
         }
+
+        input[type="number"]:focus {
+            border-color: #937dff;
+            background: rgba(147, 125, 255, 0.08);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(147, 125, 255, 0.1);
+        }
+
         button {
-            padding: 10px 20px;
-            background-color: #0078D7;
+            display: block;
+            width: 220px;
+            margin: 35px auto 0;
+            padding: 14px;
+            background: linear-gradient(135deg, #8a6dff, #6a5acd);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
         }
-        h2 {
-            color: #333;
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(147, 125, 255, 0.2);
         }
+
         .prediction {
-            margin-top: 20px;
-            font-weight: bold;
-            font-size: 18px;
-            color: #0078D7;
+            text-align: center;
+            margin-top: 30px;
+            padding: 18px;
+            background: rgba(147, 125, 255, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(149, 125, 255, 0.2);
+            color: #e6e1ff;
+            font-size: 1.3em;
+            font-weight: 600;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        ::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .form-group:hover input {
+            border-color: rgba(149, 125, 255, 0.4);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Boston House Price Prediction</h2>
+        <h2>Boston House Price Predictor</h2>
         <form action="/predict" method="POST">
-            <label>CRIM (Crime Rate):</label>
-            <input type="number" name="CRIM" step="any" required>
-
-            <label>ZN (Residential land zoned):</label>
-            <input type="number" name="ZN" step="any" required>
-
-            <label>INDUS (Non-retail business acres):</label>
-            <input type="number" name="INDUS" step="any" required>
-
-            <label>CHAS (Charles River dummy):</label>
-            <input type="number" name="CHAS" step="any" required>
-
-            <label>NOX (Nitric oxide concentration):</label>
-            <input type="number" name="NOX" step="any" required>
-
-            <label>RM (Average rooms per dwelling):</label>
-            <input type="number" name="RM" step="any" required>
-
-            <label>AGE (Proportion built before 1940):</label>
-            <input type="number" name="AGE" step="any" required>
-
-            <label>DIS (Distance to employment centers):</label>
-            <input type="number" name="DIS" step="any" required>
-
-            <label>RAD (Access to radial highways):</label>
-            <input type="number" name="RAD" step="any" required>
-
-            <label>TAX (Property tax rate):</label>
-            <input type="number" name="TAX" step="any" required>
-
-            <label>PTRATIO (Pupil-teacher ratio):</label>
-            <input type="number" name="PTRATIO" step="any" required>
-
-            <label>B (1000(Bk - 0.63)^2):</label>
-            <input type="number" name="B" step="any" required>
-
-            <label>LSTAT (% lower status population):</label>
-            <input type="number" name="LSTAT" step="any" required>
-
-            <button type="submit">Predict</button>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>CRIM (Crime Rate)</label>
+                    <input type="number" name="CRIM" step="any" required placeholder="Enter value">
+                </div>
+                <div class="form-group">
+                    <label>ZN (Residential Land)</label>
+                    <input type="number" name="ZN" step="any" required placeholder="Enter value">
+                </div>
+                <div class="form-group">
+                    <label>INDUS (Business Acres)</label>
+                    <input type="number" name="INDUS" step="any" required placeholder="Enter value">
+                </div>
+                <div class="form-group">
+                    <label>CHAS (Charles River)</label>
+                    <input type="number" name="CHAS" step="any" required placeholder="0 or 1">
+                </div>
+                <div class="form-group">
+                    <label>NOX (Nitric Oxide)</label>
+                    <input type="number" name="NOX" step="any" required placeholder="Enter concentration">
+                </div>
+                <div class="form-group">
+                    <label>RM (Rooms/Dwelling)</label>
+                    <input type="number" name="RM" step="any" required placeholder="Average rooms">
+                </div>
+                <div class="form-group">
+                    <label>AGE (Pre-1940 Homes)</label>
+                    <input type="number" name="AGE" step="any" required placeholder="Proportion">
+                </div>
+                <div class="form-group">
+                    <label>DIS (Employment Distance)</label>
+                    <input type="number" name="DIS" step="any" required placeholder="Distance measure">
+                </div>
+                <div class="form-group">
+                    <label>RAD (Highway Access)</label>
+                    <input type="number" name="RAD" step="any" required placeholder="Access index">
+                </div>
+                <div class="form-group">
+                    <label>TAX (Tax Rate)</label>
+                    <input type="number" name="TAX" step="any" required placeholder="Tax value">
+                </div>
+                <div class="form-group">
+                    <label>PTRATIO (Pupil/Teacher)</label>
+                    <input type="number" name="PTRATIO" step="any" required placeholder="Ratio value">
+                </div>
+                <div class="form-group">
+                    <label>B (Population Factor)</label>
+                    <input type="number" name="B" step="any" required placeholder="Enter factor">
+                </div>
+                <div class="form-group">
+                    <label>LSTAT (Lower Status %)</label>
+                    <input type="number" name="LSTAT" step="any" required placeholder="Percentage">
+                </div>
+            </div>
+            <button type="submit">Predict Price →</button>
         </form>
 
         {% if prediction_text %}
-            <p class="prediction">{{ prediction_text }}</p>
+            <div class="prediction">
+                Predicted Value: {{ prediction_text }}
+            </div>
         {% endif %}
     </div>
 </body>
